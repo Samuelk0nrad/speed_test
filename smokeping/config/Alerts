@@ -1,0 +1,8 @@
+*** Alerts ***
+to = admin@example.com
+from = smokeping@example.com
+
++someloss
+type = loss
+pattern = >0%,*12*,>0%,*12*,>0%
+comment = loss 3 times in a row

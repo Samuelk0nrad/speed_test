@@ -1,0 +1,8 @@
+*** General ***
+
+owner    = local
+contact  = admin@example.com
+cgiurl   = http://localhost:8082/smokeping/smokeping.cgi
+syslogfacility = local0
+
+@include /config/pathnames

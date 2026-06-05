@@ -1,0 +1,33 @@
+services:
+  smokeping:
+    image: lscr.io/linuxserver/smokeping:latest
+    container_name: smokeping
+    hostname: smokeping
+    restart: unless-stopped
+    ports:
+      - "8082:80"
+    environment:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: "Europe/Vienna"
+    volumes:
+      - ./smokeping/config:/config
+      - ./smokeping/data:/data
+
+  speedtest-tracker:
+    image: lscr.io/linuxserver/speedtest-tracker:latest
+    container_name: speedtest-tracker
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+      - "8443:443"
+    environment:
+      PUID: "1000"
+      PGID: "1000"
+      APP_KEY: "base64:/ue1Jq4/kElZqnQinrwUXKUabVCBrQMbI8h2s2XtEAY="
+      APP_URL: "http://localhost:8080"
+      DB_CONNECTION: "sqlite"
+      # Speedtest Tracker uses cron syntax; 30-second intervals are not supported.
+      SPEEDTEST_SCHEDULE: "* * * * *"
+    volumes:
+      - ./config:/config
